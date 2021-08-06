@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+</head>
+<body>
+
+<form class="container login-box" method="post" action="http://blog-force.herokuapp.com/post" id="form">
+  <h1>Home</h1><hr>
+  <h5>Add a Post</h5>
+  <div class="form-group">
+    <label>Content</label>
+      <textarea class="form-control" id="content" name="content">Too hard for my small brain to learn Falcon...</textarea>
+  </div>
+    <input hidden name="csrf_token" id="csrf_token" value="None">
+  <input type="submit" hidden id="send" />
+  <button class="btn btn-primary" onclick="create_post()">Send</button>
+</form>
+</body>
+
+<style>
+    .login-box{
+        margin-top: 100px;
+        max-width: 800px;
+    }
+</style>
+
+<script>
+    async function create_post(){
+        let content = encodeURIComponent(document.getElementById("content").value)
+        let content_hash = CryptoJS.MD5(content).toString();
+        await fetch(`http://blog-force.herokuapp.com/claim_csrf_token?token=${content_hash}`);
+        document.getElementById("csrf_token").value = content_hash;
+        document.getElementById("send").click();
+    }
+</script>
+</html>
